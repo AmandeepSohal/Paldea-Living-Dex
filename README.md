@@ -22,8 +22,9 @@ https://github.com/user-attachments/assets/c0d7daab-df22-463d-b2fa-411690d9cbe3
 * **Filtering**
 
   * Filter Pokémon by type
-  * Filter Pokémon by generation
-  * Filter Pokémon by game
+  * Filter Pokémon by name
+  * Filter Pokémon by caught/uncaught
+  * Filter Pokemon by Shiny
 
 * **Pokémon sprites**
 
