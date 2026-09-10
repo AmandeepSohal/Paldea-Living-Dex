@@ -8,8 +8,7 @@ Keep track of which Pokémon you've caught, filter the Pokédex by type and game
 Responsive Design! Changes based on YOUR device and window size!
 
 ## Demo
-<img width="1000" height="682" alt="demo" src="https://github.com/user-attachments/assets/38c88d70-8d62-4d17-b717-24523510c959" />
-
+https://github.com/user-attachments/assets/c0d7daab-df22-463d-b2fa-411690d9cbe3
 
 
 ## Features
