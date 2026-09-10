@@ -5,6 +5,13 @@ A desktop Pokémon Living Dex tracker for **Pokémon Scarlet & Violet**.
 
 Keep track of which Pokémon you've caught, filter the Pokédex by type and game, and work toward completing your Living Dex.
 
+Responsive Design! Changes based on YOUR device and window size!
+
+## Demo
+<img width="1000" height="682" alt="demo" src="https://github.com/user-attachments/assets/38c88d70-8d62-4d17-b717-24523510c959" />
+
+
+
 ## Features
 
 * **Pokédex tracker**
@@ -105,6 +112,12 @@ This project is a fan-made, non-commercial application and is not affiliated wit
 This project is currently for personal and educational use.
 
 
-## Screenshots
+## Screenshot
 <img width="1570" height="1306" alt="image" src="https://github.com/user-attachments/assets/987e28e1-fe71-4ab5-bfff-fff50eff2788" />
+<img width="1094" height="612" alt="image" src="https://github.com/user-attachments/assets/6a3d566e-3069-457f-aead-1e7dcaa87337" />
+<img width="398" height="365" alt="image" src="https://github.com/user-attachments/assets/90ed5fce-1a2d-4a7d-b59f-3e042f670591" />
+<img width="457" height="581" alt="image" src="https://github.com/user-attachments/assets/4f2cdf95-8fdd-43cc-b3d8-4853ca964ca9" />
+
+
+
 
