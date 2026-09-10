@@ -4,7 +4,6 @@ import os
 
 app = Flask(__name__)
 
-# Use absolute pathing so Electron child_process finds pokedex.json reliably
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 json_path = os.path.join(BASE_DIR, "pokedex.json")
 
