@@ -1,29 +1,7 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Menu } = require('electron');
 const { spawn } = require('child_process');
 const path = require('path');
 const http = require('http');
-
-const { app, BrowserWindow, Menu } = new BrowserWindow({
-  width: 800,
-  height: 600,
-  webPreferences: {
-    devTools: false
-  }
-});
-
-document.addEventListener('contextmenu', (e) => e.preventDefault());
-
-document.addEventListener('keydown', (e) => {
-  if (
-    e.key === 'F12' ||
-    (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
-    (e.ctrlKey && e.key === 'U')
-  ) {
-    e.preventDefault();
-  }
-});
-
-Menu.setApplicationMenu(null);
 
 let mainWindow;
 let pyProc;
@@ -36,9 +14,7 @@ function startFlask() {
         serverPath = path.join(
             process.resourcesPath,
             'server',
-            process.platform === 'win32'
-                ? 'flask_server.exe'
-                : 'flask_server'
+            process.platform === 'win32' ? 'flask_server.exe' : 'flask_server'
         );
     } else {
         // Development/testing
@@ -46,9 +22,7 @@ function startFlask() {
             __dirname,
             'dist',
             'flask_server',
-            process.platform === 'win32'
-                ? 'flask_server.exe'
-                : 'flask_server'
+            process.platform === 'win32' ? 'flask_server.exe' : 'flask_server'
         );
     }
 
@@ -76,25 +50,35 @@ function checkServerReady(url, callback) {
         if (res.statusCode === 200) {
             callback();
         } else {
-            setTimeout(() => {
-                checkServerReady(url, callback);
-            }, 200);
+            setTimeout(() => checkServerReady(url, callback), 200);
         }
     }).on('error', () => {
-        setTimeout(() => {
-            checkServerReady(url, callback);
-        }, 200);
+        setTimeout(() => checkServerReady(url, callback), 200);
     });
 }
 
 function createWindow() {
+    // Disable default menu
+    Menu.setApplicationMenu(null);
+
     mainWindow = new BrowserWindow({
         width: 1200,
         height: 800,
-
         webPreferences: {
+            devTools: false,
             nodeIntegration: false,
             contextIsolation: true
+        }
+    });
+
+    // Block keyboard shortcuts for DevTools inside the Electron window
+    mainWindow.webContents.on('before-input-event', (event, input) => {
+        const isF12 = input.key === 'F12';
+        const isDevToolsCombo = input.control && input.shift && ['I', 'J', 'C'].includes(input.key.toUpperCase());
+        const isViewSourceCombo = input.control && input.key.toUpperCase() === 'U';
+
+        if (isF12 || isDevToolsCombo || isViewSourceCombo) {
+            event.preventDefault();
         }
     });
 
@@ -107,11 +91,7 @@ function createWindow() {
 
 app.whenReady().then(() => {
     startFlask();
-
-    checkServerReady(
-        'http://127.0.0.1:5001',
-        createWindow
-    );
+    checkServerReady('http://127.0.0.1:5001', createWindow);
 });
 
 app.on('before-quit', () => {
