@@ -1,6 +1,9 @@
 name: Build Windows App
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
