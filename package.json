@@ -1,0 +1,37 @@
+{
+  "name": "paldea-living-dex",
+  "version": "1.0.0",
+  "description": "Pokemon Scarlet and Violet Living Dex Tracker",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "keywords": [],
+  "author": "Amandeep",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "44.3.0",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "com.pokevault.app",
+    "productName": "Paldea Living Dex",
+
+    "mac": {
+      "icon": "build/paldea.icns"
+    },
+
+    "win": {
+      "icon": "build/paldea.ico"
+    },
+
+    "extraResources": [
+      {
+        "from": "dist/flask_server",
+        "to": "server"
+      }
+    ]
+  }
+}
