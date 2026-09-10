@@ -7,6 +7,9 @@ Keep track of which Pokémon you've caught, filter the Pokédex by type and game
 
 Responsive Design! Changes based on YOUR device and window size!
 
+### Disclaimer: Windows may say "this will put your pc at risk" because I do not have coding signing certificates on this
+Click More Info on the SmartScreen pop-up window, then click Run Anyway. You can also temporarily add your build directory to the Windows Security > Virus & threat protection > Exclusions list.
+
 ## Demo
 https://github.com/user-attachments/assets/c0d7daab-df22-463d-b2fa-411690d9cbe3
 
