@@ -1,0 +1,110 @@
+# Paldea Living Dex
+**Current Version: 1.0.0**
+
+A desktop Pokémon Living Dex tracker for **Pokémon Scarlet & Violet**.
+
+Keep track of which Pokémon you've caught, filter the Pokédex by type and game, and work toward completing your Living Dex.
+
+## Features
+
+* **Pokédex tracker**
+
+  * Browse Pokémon available in the game
+  * Mark Pokémon as caught or uncaught
+  * Track overall completion progress
+
+* **Filtering**
+
+  * Filter Pokémon by type
+  * Filter Pokémon by generation
+  * Filter Pokémon by game
+
+* **Pokémon sprites**
+
+  * Normal and shiny sprites
+  * Pokémon type icons
+
+* **Progress saving**
+
+  * Your caught Pokémon are saved locally
+  * Progress persists between sessions
+
+* **Desktop application**
+
+  * Built with Electron
+  * Flask backend
+  * Available for Windows and macOS
+
+## Download
+
+Download the latest version from the [Releases](../../releases) page.
+
+### Windows
+
+Download the `.exe` installer.
+
+### macOS
+
+Download the `.dmg` installer.
+
+## Built With
+
+* Python
+* Flask
+* JavaScript
+* HTML / CSS
+* Electron
+* Electron Builder
+* PokeAPI
+
+## Running From Source
+
+### Requirements
+
+* Python 3.12+
+* Node.js
+* npm
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/AmandeepSohal/Paldea-Living-Dex.git
+cd Paldea-Living-Dex
+```
+
+Install Node dependencies:
+
+```bash
+npm install
+```
+
+Install Python dependencies:
+
+```bash
+pip install flask
+```
+
+### Running
+
+Start the Electron application:
+
+```bash
+npm start
+```
+
+## Disclaimer
+
+Pokémon and Pokémon-related assets are property of their respective owners.
+
+This project is a fan-made, non-commercial application and is not affiliated with, endorsed by, or sponsored by Nintendo, Game Freak, or The Pokémon Company.
+
+## License
+
+This project is currently for personal and educational use.
+
+
+## Screenshots
+<img width="1570" height="1306" alt="image" src="https://github.com/user-attachments/assets/987e28e1-fe71-4ab5-bfff-fff50eff2788" />
+
