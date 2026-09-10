@@ -3,6 +3,16 @@ const { spawn } = require('child_process');
 const path = require('path');
 const http = require('http');
 
+const { app, BrowserWindow, Menu } = new BrowserWindow({
+  width: 800,
+  height: 600,
+  webPreferences: {
+    devTools: false
+  }
+});
+
+Menu.setApplicationMenu(null);
+
 let mainWindow;
 let pyProc;
 
