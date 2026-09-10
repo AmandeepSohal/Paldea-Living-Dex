@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paldea Living Dex</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Paldea.css') }}">
+</head>
+
+<body>
+
+    <h1>Paldea Living Dex</h1>
+
+    <nav class="pokedex-nav">
+
+        <a href="#Paldea">Paldea</a>
+
+        <a href="#Teal Mask">Teal Mask</a>
+
+        <a href="#The Indigo Disk">Indigo Disk</a>
+
+    </nav>
+
+
+<!-- POKEDEX PROGRESS -->
+<div class="progress-container">
+
+    <h2>Pokédex Progress</h2>
+
+    <!-- PALDEA -->
+    <div class="progress-section">
+        <div class="progress-header">
+            <span>Paldea</span>
+            <span id="paldea-progress-text">0 / 400</span>
+        </div>
+
+        <div class="progress-bar">
+            <div id="paldea-progress-fill" class="progress-fill paldea-fill"></div>
+        </div>
+    </div>
+
+    <!-- DLC PROGRESS -->
+    <div id="dlc-progress">
+
+        <!-- TEAL MASK -->
+        <div class="progress-section">
+            <div class="progress-header">
+                <span>Teal Mask</span>
+                <span id="kitakami-progress-text">0 / 200</span>
+            </div>
+
+            <div class="progress-bar">
+                <div id="kitakami-progress-fill" class="progress-fill kitakami-fill"></div>
+            </div>
+        </div>
+
+        <!-- INDIGO DISK -->
+        <div class="progress-section">
+            <div class="progress-header">
+                <span>Indigo Disk</span>
+                <span id="blueberry-progress-text">0 / 243</span>
+            </div>
+
+            <div class="progress-bar">
+                <div id="blueberry-progress-fill" class="progress-fill blueberry-fill"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+        <!-- FILTERS -->
+        <div class="filter-container">
+            <h2>Search & Filters</h2>
+
+            <div class="filter-row">
+
+                <div class="filter-group search-group">
+                    <label for="pokemon-search">Search</label>
+
+                    <div class="search-wrapper">
+                        <input
+                            type="text"
+                            id="pokemon-search"
+                            placeholder="Search Pokémon..."
+                            autocomplete="off"
+                        >
+                        <div id="autocomplete-list"></div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label>Status</label>
+
+                    <div class="status-options">
+                        <label class="checkbox-option">
+                            <input type="checkbox" value="missing" class="status-filter">
+                            <span>Missing</span>
+                        </label>
+
+                        <label class="checkbox-option">
+                            <input type="checkbox" value="caught" class="status-filter">
+                            <span>Caught</span>
+                        </label>
+
+                        <label class="checkbox-option">
+                            <input type="checkbox" value="shiny" class="status-filter">
+                            <span>Shiny</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter-group type-group">
+                    <label for="type-filter">Type</label>
+
+                    <select id="type-filter">
+                        <option value="all">All Types</option>
+                        <option value="normal">Normal</option>
+                        <option value="fire">Fire</option>
+                        <option value="water">Water</option>
+                        <option value="electric">Electric</option>
+                        <option value="grass">Grass</option>
+                        <option value="ice">Ice</option>
+                        <option value="fighting">Fighting</option>
+                        <option value="poison">Poison</option>
+                        <option value="ground">Ground</option>
+                        <option value="flying">Flying</option>
+                        <option value="psychic">Psychic</option>
+                        <option value="bug">Bug</option>
+                        <option value="rock">Rock</option>
+                        <option value="ghost">Ghost</option>
+                        <option value="dragon">Dragon</option>
+                        <option value="dark">Dark</option>
+                        <option value="steel">Steel</option>
+                        <option value="fairy">Fairy</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group dlc-group">
+                    <label>DLC</label>
+
+                    <label class="dlc-button">
+                        <input type="checkbox" id="dlcToggle">
+                        <span>I own the DLC</span>
+                    </label>
+                </div>
+
+                <div class="filter-group shiny-display-group">
+                    <label>Sprites</label>
+                    <label class="shiny-display-button">
+                        <input type="checkbox" id="shinyDisplayToggle">
+                        <span>✨ Show Shiny Sprites</span>
+                    </label>
+                </div>
+
+                <button id="clear-filters">Clear Filters</button>
+
+            </div>
+        </div>
+
+        <!-- RELEASE ALL -->
+        <div class="release-container">
+            <button id="release-all" onclick="releaseAll()">
+                Release All
+            </button>
+        </div>
+
+    <!-- PALDEA -->
+    <h2 id = "Paldea">Paldea</h2>
+    <div class="pokemon-grid">
+        {% for pokemon in pokedex.paldea %}
+        <div class="pokemon-card" data-pokemon="{{ pokemon.name }}">
+            <img src="{{ url_for('static', filename='sprites/normal/' + pokemon.national_id|string + '.png') }}" alt="{{ pokemon.name }}">
+            <div class="pokemon-number">#{{ "%03d"|format(pokemon.dex_number) }}</div>
+            <div class="pokemon-name">{{ pokemon.name|capitalize }}</div>
+
+            <button class="location-button" onclick="showLocation(event, '{{ pokemon.name }}')">
+                Location
+            </button>
+
+            <button
+                class="shiny-button"
+                onclick="toggleShiny(event, '{{ pokemon.name }}')">
+                ✨ Shiny
+            </button>
+
+            <div class="pokemon-types">
+                {% for type in pokemon.types %}
+                <img src="{{ url_for('static', filename='types/' + type + '.png') }}" alt="{{ type }}">
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- DLC SECTION -->
+    <div id="dlc-section">
+
+        <!-- THE TEAL MASK -->
+        <h2 id = "Teal Mask">The Teal Mask</h2>
+        <div class="pokemon-grid">
+            {% for pokemon in pokedex.kitakami %}
+            <div class="pokemon-card" data-pokemon="{{ pokemon.name }}">
+                <img src="{{ url_for('static', filename='sprites/normal/' + pokemon.national_id|string + '.png') }}" alt="{{ pokemon.name }}">
+                <div class="pokemon-number">#{{ "%03d"|format(pokemon.dex_number) }}</div>
+                <div class="pokemon-name">{{ pokemon.name|capitalize }}</div>
+
+                <button class="location-button" onclick="showLocation(event, '{{ pokemon.name }}')">
+                    Location
+                </button>
+
+                <button
+                    class="shiny-button"
+                    onclick="toggleShiny(event, '{{ pokemon.name }}')">
+                    ✨ Shiny
+                </button>
+
+                <div class="pokemon-types">
+                    {% for type in pokemon.types %}
+                    <img src="{{ url_for('static', filename='types/' + type + '.png') }}" alt="{{ type }}">
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- THE INDIGO DISK -->
+        <h2 id = "The Indigo Disk">The Indigo Disk</h2>
+        <div class="pokemon-grid">
+            {% for pokemon in pokedex.blueberry %}
+            <div class="pokemon-card" data-pokemon="{{ pokemon.name }}">
+                <img src="{{ url_for('static', filename='sprites/normal/' + pokemon.national_id|string + '.png') }}" alt="{{ pokemon.name }}">
+                <div class="pokemon-number">#{{ "%03d"|format(pokemon.dex_number) }}</div>
+                <div class="pokemon-name">{{ pokemon.name|capitalize }}</div>
+
+                <button class="location-button" onclick="showLocation(event, '{{ pokemon.name }}')">
+                    Location
+                </button>
+
+                <button
+                    class="shiny-button"
+                    onclick="toggleShiny(event, '{{ pokemon.name }}')">
+                    ✨ Shiny
+                </button>
+                
+                <div class="pokemon-types">
+                    {% for type in pokemon.types %}
+                    <img src="{{ url_for('static', filename='types/' + type + '.png') }}" alt="{{ type }}">
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <!-- LOCATION MODAL -->
+    <div id="location-modal" class="location-modal">
+        <div class="location-content">
+            <button class="close-location" onclick="closeLocation()">×</button>
+            <h2 id="location-name"></h2>
+            <div id="location-list"></div>
+        </div>
+    </div>
+
+    
+</div>
+    
+<!-- RELEASE ALL MODAL -->
+<div id="release-modal" class="release-modal">
+
+    <div class="release-content">
+
+        <div class="release-icon">
+
+        </div>
+
+        <h2>Release All Pokémon?</h2>
+
+        <p>
+            This will release every Pokémon in your Living Dex.
+        </p>
+
+        <p class="release-warning">
+            This action cannot be undone.
+        </p>
+
+        <div class="release-buttons">
+
+            <button
+                class="cancel-release"
+                onclick="cancelRelease()">
+                Cancel
+            </button>
+
+            <button
+                class="confirm-release"
+                onclick="confirmRelease()">
+                Release All
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- BACK TO TOP BUTTON -->
+    <button id="back-to-top" onclick="scrollToTop()">
+        ↑
+    </button>
+
+    <!-- INJECT ALL POKEDEX DATA TO JS ONCE -->
+    <script>
+        const POKEDEX_DATA = JSON.parse('{{ pokedex | tojson }}');
+    </script>
+    <script src="{{ url_for('static', filename='Paldea.js') }}"></script>
+
+</body>
+
+</html>
